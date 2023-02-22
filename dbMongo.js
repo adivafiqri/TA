@@ -1,19 +1,21 @@
-const MongoClient = require("mongodb").MongoClient;
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
-const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+async function connectToMongo() {
+  const uri =
+    "mongodb+srv://adivafiqri:m7K0G0eMK7qL27ag@taadiva.3lgefed.mongodb.net/?retryWrites=true&w=majority";
+  const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1,
+  });
 
-async function connect() {
   try {
     await client.connect();
     console.log("Connected to MongoDB");
-    return client.db(process.env.MONGO_DB_NAME);
-  } catch (err) {
-    console.error(err);
+    return client.db("pengujiantoken"); // return the database connection
+  } catch (e) {
+    console.error("Error connecting to MongoDB", e);
   }
 }
 
-module.exports = connect;
+module.exports = connectToMongo;

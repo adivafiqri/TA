@@ -6,7 +6,7 @@ DELETE http://localhost:4000/logout
 Content-Type: application/json
 
 {
-    "token" : "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2NzEwMjY3MjUsImV4cCI6MTY3MTAyNjc1NX0.wTFmAzZAE-P8iTUFgbUY3BTr_VPQUg1fxweSC7lFVkD0xYWv-jka_RyJKtVvCSNH"
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2NzcwNzkyNjF9.pU0UwMYhQ2x7WMYCETrcpD9wrncaQa2XHo14NjqQ43Y"
 }
 
 ###
@@ -22,5 +22,6 @@ POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "username" : "adiva"
+    "username" : "adiva",
+    "password" : "adiva"
 }
