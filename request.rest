@@ -1,0 +1,26 @@
+GET http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2NzEwMjY2OTAsImV4cCI6MTY3MTAyNjcyMH0.43ISbdY6-WOp-EnBhi_iPgDVoCeJUbVRXjZB8ekCTtWr6-G9y5J6TLTCCmnzfang
+
+###
+DELETE http://localhost:4000/logout
+Content-Type: application/json
+
+{
+    "token" : "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2NzEwMjY3MjUsImV4cCI6MTY3MTAyNjc1NX0.wTFmAzZAE-P8iTUFgbUY3BTr_VPQUg1fxweSC7lFVkD0xYWv-jka_RyJKtVvCSNH"
+}
+
+###
+POST http://localhost:4000/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2NzEwMjY2NjV9.y6DUwvXOHaSdj72lLAM-u7pm-xuFbb9kHAzL7QmvXeA"
+}
+
+###
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username" : "adiva"
+}

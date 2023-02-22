@@ -1,0 +1,26 @@
+GET http://localhost:8181/posts
+Authorization: Bearer v3.local.1Zuw13uXAEfuzekJkoRC7pIziCRmXkRt-2ZzOu_GqHxwkJZLA0tbIbffIC_EmVxR6om3TS60I_NJQbCLPg1L5W-Ak1EoqJh0j4fAfiGKJgNwObUSLzsjlQbRu2KDY2HL5GDdeYC5VVefx-KbZp-AyIEamlSgdfvDh9pKSzPQCwh-6wV-YZk9_z74c3hMYWITD7AJojvCQtjLyZzUriMrDyXmwaU5gkFULciRAr44e0mVl-QpQrvex2CcNe2kPTj8I5cM45EDxIh4bdBMoErt75eZAJebc3mbi6b_aw
+
+###
+DELETE http://localhost:8080/logout
+Content-Type: application/json
+
+{
+    "token" : "v3.local.zYZ_fQGZiUYeCYCxnm4hJjHsFQ8Bb2OAf3SBtx75GH8_ENVCMCSoIOA48v8LVmN-ZVElzZg-8hzCmkEKjtz5NcZ0jc2_fw14-DuSjo4o81hJLksjytRW3Gk5NaE4R18_KPu-WOxW9ljnjAuHkHfuxYu7Hi7edbhk3kFUcF113PsA"
+}
+
+###
+POST http://localhost:8080/token
+Content-Type: application/json
+
+{
+    "token": "v3.local.fEtaMZ6jFQJIdWGGeJs5zynQJNH2bZPaRw_EKRoK-KUjngGRVZ3_s-OfTveFxZCuLRwHRhtszQN3D6Urnh-DAIn7E1hy0AgRyVTQY4VJutwclvXRLy9Ih3y0Ekw7Hn2F_ZdjzVMmae1c3KbQVZTIBmw-yb9_dDWd9-rnuFbH8fkH"
+}
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "username" : "adiva"
+}
