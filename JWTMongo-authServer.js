@@ -4,7 +4,6 @@ const app = express();
 const jwt = require("jsonwebtoken");
 
 app.use(express.json());
-
 //let refreshTokens = [];
 
 const connectToMongo = require("./dbMongo");
@@ -12,10 +11,12 @@ const dbPromise = connectToMongo();
 
 //refreshtoken
 let refreshTokensCollection;
+let userTable;
 dbPromise.then((db) => {
   refreshTokensCollection = db.collection(
     process.env.REFRESH_TOKENS_COLLECTION_NAME
   );
+  userTable = db.collection(process.env.USER_COLLECTION_NAME);
 });
 
 app.post("/token", (req, res) => {
@@ -39,50 +40,44 @@ app.delete("/logout", (req, res) => {
   res.sendStatus(204);
 });
 
-dbPromise.then((db) => {
-  app.post("/login", async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+app.post("/login", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
-    // Authenticate user in MongoDB
-    const collection = db.collection(process.env.MONGO_COLLECTION_NAME);
-    const user = await collection.findOne({
-      username: username,
-      password: password,
-    });
-
-    if (!user) {
-      return res.sendStatus(401);
-    }
-
-    // Generate tokens and respond to client
-    const accessToken = generateAccessToken({ name: username });
-    const refreshToken = generateRefreshToken({ name: username });
-
-    //memasukan refresh token ke collection
-    refreshTokensCollection.insertOne(
-      { token: refreshToken },
-      (err, result) => {
-        if (err) return res.sendStatus(500);
-      }
-    );
-
-    //respons
-    res.json({ accessToken: accessToken, refreshToken: refreshToken });
+  // Authenticate user in MongoDB
+  const user = userTable.findOne({
+    username: username,
+    password: password,
   });
 
-  function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "30s",
-      algorithm: "HS384",
-    });
+  if (!user) {
+    return res.sendStatus(401);
   }
 
-  function generateRefreshToken(user) {
-    return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-  }
+  // Generate tokens and respond to client
+  const accessToken = generateAccessToken({ name: username });
+  const refreshToken = generateRefreshToken({ name: username });
 
-  app.listen(4000, () => {
-    console.log("Server started on port 4000");
+  //memasukan refresh token ke collection
+  refreshTokensCollection.insertOne({ token: refreshToken }, (err, result) => {
+    if (err) return res.sendStatus(500);
   });
+
+  //respons
+  res.json({ accessToken: accessToken, refreshToken: refreshToken });
+});
+
+function generateAccessToken(user) {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "30s",
+    algorithm: "HS384",
+  });
+}
+
+function generateRefreshToken(user) {
+  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+}
+
+app.listen(4000, () => {
+  console.log("Server started on port 4000");
 });
