@@ -1,12 +1,12 @@
 GET http://localhost:8181/posts
-Authorization: Bearer v3.local.1Zuw13uXAEfuzekJkoRC7pIziCRmXkRt-2ZzOu_GqHxwkJZLA0tbIbffIC_EmVxR6om3TS60I_NJQbCLPg1L5W-Ak1EoqJh0j4fAfiGKJgNwObUSLzsjlQbRu2KDY2HL5GDdeYC5VVefx-KbZp-AyIEamlSgdfvDh9pKSzPQCwh-6wV-YZk9_z74c3hMYWITD7AJojvCQtjLyZzUriMrDyXmwaU5gkFULciRAr44e0mVl-QpQrvex2CcNe2kPTj8I5cM45EDxIh4bdBMoErt75eZAJebc3mbi6b_aw
+Authorization: Bearer v3.local.kIrwN2NzCfcZmYC37UhSNf289OMFB0cTQBIT1_RLxr5uO0Wk5WP6xfIxpegQQHrm-Xr84AYWsWSB76-_O9zyZP_oen8g-jgKBkeJvN9QQXmYLxM3zTRRb37OwxWH6AhzBoIbhLTqr1m3mzzuDDex3dyffSs8mwvuoPlBJvdXSCLUNS9QXvtzwKbDxF1Xgg0CXKXfhZ_ZV4y4Qx-2yMKAOjLds3l5ukYwb1KxVa5DNTUoFQWdsI6SxlFxj6Xi9ByPKrbl4wXPJAaCBMm9hrIrWFDGu1q574TTgqM5zA
 
 ###
 DELETE http://localhost:8080/logout
 Content-Type: application/json
 
 {
-    "token" : "v3.local.zYZ_fQGZiUYeCYCxnm4hJjHsFQ8Bb2OAf3SBtx75GH8_ENVCMCSoIOA48v8LVmN-ZVElzZg-8hzCmkEKjtz5NcZ0jc2_fw14-DuSjo4o81hJLksjytRW3Gk5NaE4R18_KPu-WOxW9ljnjAuHkHfuxYu7Hi7edbhk3kFUcF113PsA"
+    "token" : "v3.local.wbKo-aTkgOzdFrYHwgK-W9iPq2K5u_3xdG19CEEu-ZHc69yh_I7_Ycpa8ST4BJ4F80SC7jG4ZqAXqXJnbTvr9HBp8CPj0Pt2XdM2KxrPbfOiFo3CVoKoCObES2b9c_FlX7OOUJ1-98CHAfjsy_79Q3Dxz9TAQX3lI1fj8AS3-IKn"
 }
 
 ###
@@ -14,7 +14,7 @@ POST http://localhost:8080/token
 Content-Type: application/json
 
 {
-    "token": "v3.local.fEtaMZ6jFQJIdWGGeJs5zynQJNH2bZPaRw_EKRoK-KUjngGRVZ3_s-OfTveFxZCuLRwHRhtszQN3D6Urnh-DAIn7E1hy0AgRyVTQY4VJutwclvXRLy9Ih3y0Ekw7Hn2F_ZdjzVMmae1c3KbQVZTIBmw-yb9_dDWd9-rnuFbH8fkH"
+    "token": "v3.local.6P8SaGJNaS5RGTKG3MYsFfCsC5x61jgDpoWiAYNEkFP91c-3XXG6epjZLImm4lblHqCVc9mOYMCzEmO1Te5veMa9AGcYT4GWUQ8J2cs_2oY3iyVRexxw48Q5ZzvHxkDr91ApjdnaP0nLcU0sodpVHNqwVKIHTO1gu9s8B7E9XGzm"
 }
 
 ###
@@ -22,5 +22,6 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-    "username" : "adiva"
+    "username" : "admin",
+    "password" : "admin"
 }
