@@ -35,8 +35,8 @@ app.post("/token", async (req, res) => {
 
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
-    const accessToken = generateAccessToken({ name: user.username });
-    res.json({ accessToken: accessToken });
+    const accessToken = generateAccessToken({ name: user.name });
+    res.json({ accessToken: accessToken, name: user.name });
   });
 });
 

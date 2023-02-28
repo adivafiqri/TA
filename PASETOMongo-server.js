@@ -21,19 +21,19 @@ app.get("/posts", async (req, res) => {
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
 
-  //verifikasi token
-  const verify = await V3.decrypt(
-    token,
-    process.env.ACCESS_TOKEN_SECRET,
-    (err) => {
-      if (err) return res.sendStatus(403);
+  try {
+    const verify = await V3.decrypt(token, process.env.ACCESS_TOKEN_SECRET);
+    const posts = await postsCollection
+      .find({ username: verify.name })
+      .toArray();
+    res.json(posts);
+  } catch (err) {
+    if (err.code === "ERR_PASETO_CLAIM_INVALID") {
+      return res.status(403).json({ error: "Token Expired" });
+    } else {
+      return res.status(500).json({ error: "Server error" });
     }
-  );
-
-  // Find all posts in the collection that match the username from the verified token
-  const posts = await postsCollection.find({ username: verify.name }).toArray();
-
-  res.json(posts);
+  }
 });
 
 app.listen(8181, () => {

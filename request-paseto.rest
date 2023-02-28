@@ -1,5 +1,5 @@
 GET http://localhost:8181/posts
-Authorization: Bearer v3.local.kIrwN2NzCfcZmYC37UhSNf289OMFB0cTQBIT1_RLxr5uO0Wk5WP6xfIxpegQQHrm-Xr84AYWsWSB76-_O9zyZP_oen8g-jgKBkeJvN9QQXmYLxM3zTRRb37OwxWH6AhzBoIbhLTqr1m3mzzuDDex3dyffSs8mwvuoPlBJvdXSCLUNS9QXvtzwKbDxF1Xgg0CXKXfhZ_ZV4y4Qx-2yMKAOjLds3l5ukYwb1KxVa5DNTUoFQWdsI6SxlFxj6Xi9ByPKrbl4wXPJAaCBMm9hrIrWFDGu1q574TTgqM5zA
+Authorization: Bearer v3.local.iHIARatXujd4Vd4Qv9ZwYGte5ja2do5XOIr8JgiejozKczpW6KP11PNpaFgADOdXU-tulCV9AHBUV7B_ejn9h68542wPk4iXvEZgCPzoRf953tWaERDIWruU7HEOcIqNaU49KF6QiHRvCIC6JM9KkZ6DmgXsvq_YxGaPVpS4PIFnGGRO28GyGazepo995vbzPcubZXgACOOyZ-uEIqflLE7xtLJGeuA5K7i4dHm_mxj6c8Wq0x0wtl228Bl7dbAdNNcroOSFTeByPT3Moo-mrNE8wOvi8p7vseHMqw
 
 ###
 DELETE http://localhost:8080/logout
@@ -14,7 +14,7 @@ POST http://localhost:8080/token
 Content-Type: application/json
 
 {
-    "token": "v3.local.6P8SaGJNaS5RGTKG3MYsFfCsC5x61jgDpoWiAYNEkFP91c-3XXG6epjZLImm4lblHqCVc9mOYMCzEmO1Te5veMa9AGcYT4GWUQ8J2cs_2oY3iyVRexxw48Q5ZzvHxkDr91ApjdnaP0nLcU0sodpVHNqwVKIHTO1gu9s8B7E9XGzm"
+    "token": "v3.local.F9q7iWbB9h2z9QCtOTIf85vlbcWmFqWp58VVJnbMeAi0T6BsfGLYNMvnzuHe1lm_Fqgtiu9CV0bPQXc56ti1Efh4c1swWJGNjwsMEoYB78eumex-3e1gu0gtt2XlZ8uyw56HE2QUW8b4jpPHBLb5aw9I_pPU2A3eHGMeSwQ5d2z0"
 }
 
 ###
