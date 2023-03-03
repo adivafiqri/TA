@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  jwt-mongo-server:
+    build: .
+    container_name: jwt-mongo-server
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/pengujiantoken
+    depends_on:
+      - mongodb
+
+  jwt-mongo-authserver:
+    build: .
+    container_name: jwt-mongo-auth
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/pengujiantoken
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=pengujiantoken
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
