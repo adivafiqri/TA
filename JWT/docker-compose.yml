@@ -1,25 +1,37 @@
 version: "3.9"
 
 services:
-  jwt-mongo-server:
+  server:
     build: .
-    container_name: jwt-mongo-server
+    container_name: server
     ports:
       - "3000:3000"
     environment:
       - MONGO_URL=mongodb://mongodb:27017/pengujiantoken
+      - PORT=3000
     depends_on:
       - mongodb
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    stdin_open: true
+    command: npm run devStart
 
-  jwt-mongo-authserver:
+  authserver:
     build: .
-    container_name: jwt-mongo-auth
+    container_name: authserver
     ports:
       - "4000:4000"
     environment:
       - MONGO_URL=mongodb://mongodb:27017/pengujiantoken
+      - PORT=3000
     depends_on:
       - mongodb
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    stdin_open: true
+    command: npm run devStart2
 
   mongodb:
     image: mongo:latest
@@ -31,3 +43,4 @@ services:
 
 volumes:
   mongo_data:
+  node_modules:

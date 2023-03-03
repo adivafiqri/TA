@@ -14,7 +14,3 @@ COPY . .
 # Expose ports
 EXPOSE 4000
 EXPOSE 3000
-
-# Start the app
-CMD ["sh", "-c", "npm run devStart2 && npm run devStart2"]
-##RUN npm run devStart && npm run devStart2

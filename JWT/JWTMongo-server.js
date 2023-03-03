@@ -35,5 +35,5 @@ function authenticateToken(req, res, next) {
 }
 
 app.listen(3000, () => {
-  console.log("Server started oneee port 3000");
+  console.log("Server started on port 3000 testing");
 });
