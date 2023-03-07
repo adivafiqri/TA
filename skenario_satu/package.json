@@ -1,0 +1,27 @@
+{
+  "name": "jwt-webdev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon --legacy-watch JWTMongo-server.js",
+    "devStart2": "nodemon --legacy-watch JWTMongo-authServer.js",
+    "devStart3": "nodemon PASETOMongo-server.js",
+    "devStart4": "nodemon PASETOMongo-authServer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongo": "^0.1.0",
+    "mongodb": "^5.0.1",
+    "paseto": "^3.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
