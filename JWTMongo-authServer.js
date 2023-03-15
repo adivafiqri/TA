@@ -64,8 +64,14 @@ app.post("/login", async (req, res) => {
   }
 
   // Generate tokens and respond to client
-  const accessToken = generateAccessToken({ name: username });
-  const refreshToken = generateRefreshToken({ name: username });
+  const accessToken = generateAccessToken({
+    userId: user.userId,
+    name: username,
+  });
+  const refreshToken = generateRefreshToken({
+    userId: user.userId,
+    name: username,
+  });
 
   //memasukan refresh token ke collection
   refreshTokensCollection.insertOne({ token: refreshToken }, (err, result) => {
@@ -73,7 +79,10 @@ app.post("/login", async (req, res) => {
   });
 
   //respons
-  res.json({ accessToken: accessToken, refreshToken: refreshToken });
+  res.json({
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+  });
 });
 
 function generateAccessToken(user) {

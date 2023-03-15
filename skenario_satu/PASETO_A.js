@@ -1,7 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const jwt = require("jsonwebtoken");
+const {
+  V4: { sign, verify },
+} = require("paseto");
 
 app.use(express.json());
 
@@ -35,54 +37,13 @@ const checkPermission = async (shopId, userId) => {
   }
 };
 
-// Middleware untuk memeriksa token JWT dan hak akses pengguna ke toko
-// const authMiddleware = async (req, res, next) => {
-//   try {
-//     // Mendapatkan token JWT dari header Authorization
-//     const authHeader = req.headers["authorization"];
-//     const token = authHeader && authHeader.split(" ")[1];
-//     if (token == null) return res.sendStatus(401);
-
-//     // Memeriksa apakah token valid dan mendapatkan payload-nya
-//     const payload = jwt.verify(
-//       token,
-//       process.env.ACCESS_TOKEN_SECRET,
-//       (err, user) => {
-//         if (err) return res.sendStatus(403);
-//         req.user = user;
-//       }
-//     );
-//     console.log(payload);
-//     // Memeriksa apakah pengguna memiliki hak akses ke toko yang dimaksud
-//     const hasPermission = await checkPermission(
-//       req.params.shopId,
-//       payload.userId
-//     );
-
-//     // Jika pengguna memiliki hak akses, lanjut ke handler selanjutnya, jika tidak, kirim respon 403 Forbidden
-//     if (hasPermission) {
-//       req.userID = payload.userId;
-//       next();
-//     } else {
-//       res.status(403).send("Forbidden");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     res.status(401).send("Unauthorized");
-//   }
-// };
 const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
     if (token == null) return res.sendStatus(401);
 
-    const payload = await new Promise((resolve, reject) => {
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) reject(err);
-        resolve(user);
-      });
-    });
+    const payload = await verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     console.log(payload.userId);
     const hasPermission = await checkPermission(
@@ -106,6 +67,25 @@ const authMiddleware = async (req, res, next) => {
 app.get("/shops/:shopId/revenue_data.json", authMiddleware, (req, res) => {
   // Menampilkan data penjualan untuk toko dengan ID shopId
   res.send("Revenue data for shop " + req.params.shopId);
+});
+
+// Handler untuk endpoint /login
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  // Validasi username dan password
+  if (username === process.env.USERNAME && password === process.env.PASSWORD) {
+    // Generate access token menggunakan PASETO v4
+    const accessToken = await sign(
+      { userId: process.env.USER_ID },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION }
+    );
+
+    res.json({ accessToken });
+  } else {
+    res.status(401).send("Invalid credentials");
+  }
 });
 
 app.listen(5000, () => {

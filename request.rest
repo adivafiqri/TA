@@ -1,12 +1,12 @@
 GET http://localhost:3000/posts
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc0ODQ5MTAsImV4cCI6MTY3NzQ4NDk0MH0.ShVmG2FLh0W5ezoHTTfayZcjQDhuNxi0UW1MboOhJ2exR0etGzhNF4N8mdXytG2F
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc5MDcxNTUsImV4cCI6MTY3NzkwNzE4NX0.oI6Y3vcZUlZbmibuicIXbeKQL-_2-ADkFFhv3qpFL9tIbMjbGd2czS3N0bxuH3i8
 
 ###
 DELETE http://localhost:4000/logout
 Content-Type: application/json
 
 {
-    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc0Nzk4OTB9.dOykb-yoQ6PiGxKUBbOC7mbl72PGWoII83zHs_gl9Wk"
+    "token" : "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc5MDcxNTUsImV4cCI6MTY3NzkwNzE4NX0.oI6Y3vcZUlZbmibuicIXbeKQL-_2-ADkFFhv3qpFL9tIbMjbGd2czS3N0bxuH3i8"
 }
 
 ###
@@ -22,6 +22,10 @@ POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "username" : "adiva",
-    "password" : "adiva"
+    "username" : "admin",
+    "password" : "admin"
 }
+
+###
+GET  http://localhost:5000/shops/2/revenue_data.json
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImFkbWluIiwiaWF0IjoxNjc4NzE4MTE3LCJleHAiOjE2Nzg3MTgxNDd9.sGfI1yCVyyDTD4-M9O2v17PuI3p96guxEst1_xFoogEwythQikf355HtBO5FjI6R

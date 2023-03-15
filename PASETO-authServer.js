@@ -43,8 +43,14 @@ app.post("/login", (req, res) => {
   //AES 256 CTR
   const username = req.body.username;
   const user = { name: username };
-  const accessToken = generateAccessToken(user);
-  const refreshToken = generateRefreshToken(user);
+  const accessToken = generateAccessToken({
+    userId: user.userId,
+    name: username,
+  });
+  const refreshToken = generateRefreshToken({
+    userId: user.userId,
+    name: username,
+  });
   //access token
   (async () => {
     res.json({
