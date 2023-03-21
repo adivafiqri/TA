@@ -22,10 +22,24 @@ POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "username" : "admin",
-    "password" : "admin"
+    "username" : "john",
+    "password" : "john"
 }
 
-###
+### Skenario satu A
 GET  http://localhost:5000/shops/2/revenue_data.json
 Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImFkbWluIiwiaWF0IjoxNjc5MzcyNzUyLCJleHAiOjE2NzkzNzI3ODJ9.15SWYHFUaYXS-wCbiR2DxFCQySCw-ms4YoXj-CjXyIMsqn31il_PxR7tVkg6B8lH
+
+### Skenario satu B
+PATCH  http://localhost:5000/users/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9obiIsImlhdCI6MTY3OTM4MzY4OCwiZXhwIjoxNjc5MzgzNzE4fQ.WEtp2Dbz-MVquXJi-pc2Tr7TX5SAYmslJRUSUdYwOWElteb_1ShP3ea19I7kbsD7
+
+Content-Type: application/json
+
+{
+    "username" : "ee",
+    "password" : "ee"
+}
+
+
+
