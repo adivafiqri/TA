@@ -81,8 +81,8 @@ app.post("/login", async (req, res) => {
     return res.sendStatus(401);
   }
 
-  const accessToken = await generateAccessToken({ name: username });
-  const refreshToken = await generateRefreshToken({ name: username });
+  const accessToken = await generateAccessToken({ userId: user.userId,name: username });
+  const refreshToken = await generateRefreshToken({ userId: user.userId,name: username });
 
   try {
     await refreshTokensCollection.insertOne({ token: refreshToken });

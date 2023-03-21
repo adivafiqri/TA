@@ -28,4 +28,4 @@ Content-Type: application/json
 
 ###
 GET  http://localhost:5000/shops/2/revenue_data.json
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImFkbWluIiwiaWF0IjoxNjc4NzE4MTE3LCJleHAiOjE2Nzg3MTgxNDd9.sGfI1yCVyyDTD4-M9O2v17PuI3p96guxEst1_xFoogEwythQikf355HtBO5FjI6R
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImFkbWluIiwiaWF0IjoxNjc5MzcyNzUyLCJleHAiOjE2NzkzNzI3ODJ9.15SWYHFUaYXS-wCbiR2DxFCQySCw-ms4YoXj-CjXyIMsqn31il_PxR7tVkg6B8lH

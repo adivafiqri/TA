@@ -1,9 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const {
-  V4: { sign, verify },
-} = require("paseto");
+const { V3 } = require("paseto");
 
 app.use(express.json());
 
@@ -43,8 +41,7 @@ const authMiddleware = async (req, res, next) => {
     const token = authHeader && authHeader.split(" ")[1];
     if (token == null) return res.sendStatus(401);
 
-    const payload = await verify(token, process.env.ACCESS_TOKEN_SECRET);
-
+    const payload = await V3.decrypt(token, process.env.ACCESS_TOKEN_SECRET);
     console.log(payload.userId);
     const hasPermission = await checkPermission(
       req.params.shopId,
@@ -57,9 +54,12 @@ const authMiddleware = async (req, res, next) => {
     } else {
       res.status(403).send("Forbidden");
     }
-  } catch (error) {
-    console.log(error);
-    res.status(401).send("Unauthorized");
+  } catch (err) {
+    if (err.code === "ERR_PASETO_CLAIM_INVALID") {
+      return res.status(403).json({ error: "Token Expired" });
+    } else {
+      return res.status(500).json({ error: "Server error" });
+    }
   }
 };
 
@@ -67,25 +67,6 @@ const authMiddleware = async (req, res, next) => {
 app.get("/shops/:shopId/revenue_data.json", authMiddleware, (req, res) => {
   // Menampilkan data penjualan untuk toko dengan ID shopId
   res.send("Revenue data for shop " + req.params.shopId);
-});
-
-// Handler untuk endpoint /login
-app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-
-  // Validasi username dan password
-  if (username === process.env.USERNAME && password === process.env.PASSWORD) {
-    // Generate access token menggunakan PASETO v4
-    const accessToken = await sign(
-      { userId: process.env.USER_ID },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION }
-    );
-
-    res.json({ accessToken });
-  } else {
-    res.status(401).send("Invalid credentials");
-  }
 });
 
 app.listen(5000, () => {

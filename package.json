@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon --legacy-watch JWTMongo-server.js",
-    "devStart2": "nodemon --legacy-watch JWTMongo-authServer.js",
+    "loginjwt": "nodemon --legacy-watch JWTMongo-authServer.js",
     "devStart3": "nodemon PASETOMongo-server.js",
-    "devStart4": "nodemon PASETOMongo-authServer.js",
+    "loginpaseto": "nodemon PASETOMongo-authServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

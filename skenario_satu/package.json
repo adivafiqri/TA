@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon --legacy-watch JWT_A.js",
-    "pasetoStart": "nodemon --legacy-watch PASETO_A.js",
+    "AjwtStart": "nodemon --legacy-watch A_JWT.js",
+    "ApasetoStart": "nodemon --legacy-watch A_PASETO.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

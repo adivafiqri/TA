@@ -25,3 +25,7 @@ Content-Type: application/json
     "username" : "admin",
     "password" : "admin"
 }
+
+###
+GET  http://localhost:5000/shops/2/revenue_data.json
+Authorization: Bearer v3.local.Mc8J9UOI6g1NH2lvrmoh8F4CAzT5aWh3uM6q5QZACwor1cZA7hkZo8jPis0kM17VzDj7kydQ1oEIBJZ7H5zrl9K6DIq3Vcr9FQd_0jZ2Om7b2gqldM1r7rdfEJkW7Zrq_wkeLsMIsEQ4XDvm6XBFFIVwX4DbaPxZ5mAlxRkeI3FJopVn0LTuygnSVmUso6krkE9BSEN8nuhDuKkiZ3M_d0MbPo0U7sQim2kCZglpoHRNEebT1Y_834RNWt9ooS5Aj9XD1OZRtxp1JrzV6nF6JfMIAzrIUj5aGZTI9qs55GjGnKIMfAlOx6Q
