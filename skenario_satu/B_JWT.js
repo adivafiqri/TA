@@ -64,8 +64,7 @@ dbPromise.then((db) => {
           console.log(err);
           return res.status(500).json({ message: "Internal Server Error" });
         }
-
-        return res.status(200).json({ message: "User data updated" });
+        if(result) return res.status(200).json({ message: "User data updated" });
       }
     );
   });

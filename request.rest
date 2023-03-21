@@ -22,8 +22,8 @@ POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "username" : "john",
-    "password" : "john"
+    "username" : "ee",
+    "password" : "ee"
 }
 
 ### Skenario satu A
@@ -32,14 +32,14 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwib
 
 ### Skenario satu B
 PATCH  http://localhost:5000/users/1
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9obiIsImlhdCI6MTY3OTM4MzY4OCwiZXhwIjoxNjc5MzgzNzE4fQ.WEtp2Dbz-MVquXJi-pc2Tr7TX5SAYmslJRUSUdYwOWElteb_1ShP3ea19I7kbsD7
-
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6bnVsbCwiaWF0IjoxNjc5Mzg2NzI3LCJleHAiOjE2NzkzODY3NTd9.sXL9gqDsrc8ciscMdOLIw_D7EIy_Z5waYRiIKpcDQuecXdN4XavzGdEGw7h8YyFg
 Content-Type: application/json
 
 {
-    "username" : "ee",
-    "password" : "ee"
+    "username" : "aa",
+    "password" : "aa"
 }
+
 
 
 
