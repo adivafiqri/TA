@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const jwt = require("jsonwebtoken");
+const { V3 } = require("paseto");
 const bodyParser = require("body-parser");
 const port = 5000;
 
@@ -29,19 +29,18 @@ const verifyToken = async (req, res, next) => {
     const token = authHeader && authHeader.split(" ")[1];
     if (token == null)
       return res.sendStatus(401).json({ message: "Token not found" });
-    const decoded = await new Promise((resolve, reject) => {
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) reject(err);
-        resolve(user);
-      });
-    });
+
+    const decoded = await V3.decrypt(token, process.env.ACCESS_TOKEN_SECRET);
 
     console.log(decoded.userId);
     req.userId = decoded.userId;
     next();
   } catch (err) {
-    console.log(err);
-    return res.status(403).json({ message: "Invalid token" });
+    if (err.code === "ERR_PASETO_CLAIM_INVALID") {
+      return res.status(403).json({ error: "Token Expired" });
+    } else {
+      return res.status(500).json({ error: "Server error" });
+    }
   }
 };
 

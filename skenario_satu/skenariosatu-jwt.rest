@@ -1,0 +1,45 @@
+GET http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc5MDcxNTUsImV4cCI6MTY3NzkwNzE4NX0.oI6Y3vcZUlZbmibuicIXbeKQL-_2-ADkFFhv3qpFL9tIbMjbGd2czS3N0bxuH3i8
+
+###
+DELETE http://localhost:4000/logout
+Content-Type: application/json
+
+{
+    "token" : "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc5MDcxNTUsImV4cCI6MTY3NzkwNzE4NX0.oI6Y3vcZUlZbmibuicIXbeKQL-_2-ADkFFhv3qpFL9tIbMjbGd2czS3N0bxuH3i8"
+}
+
+###
+POST http://localhost:4000/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc0ODI3MzJ9.30Nj4QyQcDG11XXuL9oInZgfKZaPvCTjHOIoQhglvxk"
+}
+
+### LOGIN
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username" : "aa",
+    "password" : "aa"
+}
+
+### Skenario satu A
+GET  http://localhost:5000/shops/2/revenue_data.json
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImFkbWluIiwiaWF0IjoxNjc5MzcyNzUyLCJleHAiOjE2NzkzNzI3ODJ9.15SWYHFUaYXS-wCbiR2DxFCQySCw-ms4YoXj-CjXyIMsqn31il_PxR7tVkg6B8lH
+
+### Skenario satu B
+PATCH  http://localhost:5000/users/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6bnVsbCwiaWF0IjoxNjc5Mzg2NzI3LCJleHAiOjE2NzkzODY3NTd9.sXL9gqDsrc8ciscMdOLIw_D7EIy_Z5waYRiIKpcDQuecXdN4XavzGdEGw7h8YyFg
+Content-Type: application/json
+
+{
+    "username" : "aa",
+    "password" : "aa"
+}
+
+
+
+
