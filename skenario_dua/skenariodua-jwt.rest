@@ -1,0 +1,12 @@
+###
+GET http://localhost:3000/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwibmFtZSI6ImJvYiIsImlhdCI6MTY3OTczNTIyNX0.aqK_E7oaRoa62V20Kay7Y6xrjkFwy1S_djgmt9PYWMQ
+
+### LOGIN
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username" : "bob",
+    "password" : "bob"
+}

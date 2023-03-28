@@ -64,10 +64,13 @@ app.post("/login", async (req, res) => {
   }
 
   // Generate tokens and respond to client
+  const start = performance.now();
   const accessToken = generateAccessToken({
     userId: user.userId,
     name: username,
   });
+  const end = performance.now();
+  const hasil = start - end;
   const refreshToken = generateRefreshToken({
     userId: user.userId,
     name: username,
@@ -82,6 +85,7 @@ app.post("/login", async (req, res) => {
   res.json({
     accessToken: accessToken,
     refreshToken: refreshToken,
+    hasil: hasil,
   });
 });
 

@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { performance } = require("perf_hooks");
 const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
@@ -64,8 +65,18 @@ app.post("/login", async (req, res) => {
   }
 
   // Generate tokens and respond to client
-  const accessToken = generateAccessToken({ name: username });
-  const refreshToken = generateRefreshToken({ name: username });
+  const start = performance.now();
+  const accessToken = generateAccessToken({
+    userId: user.userId,
+    name: username,
+  });
+  const end = performance.now();
+  const hasil = `${end - start} ms`;
+  const jumlahtoken = accessToken.length;
+  const refreshToken = generateRefreshToken({
+    userId: user.userId,
+    name: username,
+  });
 
   //memasukan refresh token ke collection
   refreshTokensCollection.insertOne({ token: refreshToken }, (err, result) => {
@@ -73,7 +84,12 @@ app.post("/login", async (req, res) => {
   });
 
   //respons
-  res.json({ accessToken: accessToken, refreshToken: refreshToken });
+  res.json({
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    ExecutionTime: hasil,
+    jumlahtoken: jumlahtoken,
+  });
 });
 
 function generateAccessToken(user) {

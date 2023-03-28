@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon --legacy-watch JWTMongo-server.js",
-    "devStart2": "nodemon --legacy-watch JWTMongo-authServer.js",
+    "jwtmongoserver": "nodemon --legacy-watch JWTMongo-server.js",
+    "jwtmongoauth": "nodemon --legacy-watch JWTMongo-authServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
