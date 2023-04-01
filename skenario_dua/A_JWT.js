@@ -20,33 +20,49 @@ dbPromise.then((db) => {
   userCollection = db.collection(process.env.USER_COLLECTION_NAME);
 });
 
-app.post("/token", async (req, res) => {
-  const refreshToken = req.body.token;
+// endpoint untuk membuat token
+app.get("/api/token", (req, res) => {
+  const payload = { id: 1 };
+  const options = { expiresIn: "1h" };
 
-  if (refreshToken == null) return res.sendStatus(401);
-  const findrefreshTokens = await refreshTokensCollection.findOne({
-    token: refreshToken,
-  });
-
-  if (!findrefreshTokens) {
-    console.log("tidak ada collection");
-    return res.sendStatus(401);
-  }
-
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    const accessToken = generateAccessToken({ name: user.name });
-    res.json({ accessToken: accessToken, name: user.name });
-  });
+  const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, options);
+  res.json({ token });
 });
 
-//Logout
-app.delete("/logout", (req, res) => {
-  const refreshToken = req.body.token;
-  refreshTokensCollection.deleteOne({ token: refreshToken }, (err, result) => {
-    if (err) return res.sendStatus(500);
-  });
-  res.sendStatus(204);
+// endpoint untuk menambah user
+app.post("/api/users", async (req, res) => {
+  const { username, email, password, role } = req.body;
+  // verifikasi token
+  const token = req.headers.authorization.split(" ")[1];
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {
+      algorithms: ["none"],
+    });
+    if (decoded.role !== "admin") {
+      res.status(403).json({ message: "Unauthorized" });
+      return;
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+    return;
+  }
+
+  // proses tambah user
+  try {
+    const result = await userCollection.insertOne({
+      username: username,
+      email: email,
+      password: password,
+      role: role,
+    });
+    if (result) {
+      res.json({ message: "User added successfully" });
+    } else {
+      res.status(401).json({ message: "Gagal insert data!" });
+    }
+  } catch (err) {
+    res.status(401).json({ message: "Gagal insert data!" });
+  }
 });
 
 //Verify Access Token
@@ -56,13 +72,18 @@ app.get("/verify", (req, res) => {
   if (token == null)
     return res.sendStatus(401).json({ message: "Token not found" });
   console.log(token);
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).send({ message: "Invalid token" });
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    { algorithms: ["none"] },
+    (err, decoded) => {
+      if (err) {
+        return res.status(401).send({ message: "Invalid token" });
+      }
+      req.user = decoded;
+      console.log(req.user);
     }
-    req.user = decoded;
-    console.log(req.user);
-  });
+  );
 });
 
 //Login
@@ -85,6 +106,8 @@ app.post("/login", async (req, res) => {
   const accessToken = generateAccessToken({
     userId: user.userId,
     name: username,
+    email: user.email,
+    role: user.role,
   });
   const refreshToken = generateRefreshToken({
     userId: user.userId,
@@ -104,15 +127,11 @@ app.post("/login", async (req, res) => {
 });
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-    algorithm: "none",
-  });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { algorithm: "none" });
 }
-
 function generateRefreshToken(user) {
   return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 }
-
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });

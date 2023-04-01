@@ -1,12 +1,27 @@
 ###
 GET http://localhost:3000/verify
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwibmFtZSI6ImJvYiIsImlhdCI6MTY3OTczNTIyNX0.aqK_E7oaRoa62V20Kay7Y6xrjkFwy1S_djgmt9PYWMQ
+Authorization: Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VySWQiOiIzIiwibmFtZSI6ImJvYiIsImlhdCI6MTY4MDIzMzE2Nn0.
 
 ### LOGIN
 POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "username" : "bob",
-    "password" : "bob"
+    "username" : "alice",
+    "password" : "alice"
+}
+
+### Mendapatkan token
+GET http://localhost:3000/api/token
+
+###
+POST http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VySWQiOiIyIiwibmFtZSI6ImFsaWNlIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MDI0Mzc4MX0.
+Content-Type: application/json
+
+{
+    "username" : "testing",
+    "email" : "email@testing.com",
+    "password" : "testing",
+    "role" : "admin"
 }
