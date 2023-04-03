@@ -23,7 +23,7 @@ dbPromise.then((db) => {
 });
 
 // Middleware to verify JWT token
-const verifyToken = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -40,13 +40,16 @@ const verifyToken = async (req, res, next) => {
     req.userId = decoded.userId;
     next();
   } catch (err) {
+    if (err instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ message: "Token expired" });
+    }
     console.log(err);
     return res.status(403).json({ message: "Invalid token" });
   }
 };
 
 // Protected route
-app.patch("/users/:userId", verifyToken, (req, res) => {
+app.patch("/users/:userId", authMiddleware, (req, res) => {
   // Check if the user is authorized to access the resource
   if (req.userId !== req.params.userId) {
     return res.status(403).json({ message: "Forbiddens" });

@@ -127,7 +127,10 @@ app.post("/login", async (req, res) => {
 });
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { algorithm: "none" });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+    algorithm: "HS384",
+    issuer: "urn:jwt",
+  });
 }
 function generateRefreshToken(user) {
   return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);

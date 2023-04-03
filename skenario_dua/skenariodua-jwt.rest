@@ -11,9 +11,6 @@ Content-Type: application/json
     "password" : "alice"
 }
 
-### Mendapatkan token
-GET http://localhost:3000/api/token
-
 ###
 POST http://localhost:3000/api/users
 Authorization: Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VySWQiOiIyIiwibmFtZSI6ImFsaWNlIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MDI0Mzc4MX0.

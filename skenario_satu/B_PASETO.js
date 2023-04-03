@@ -23,7 +23,7 @@ dbPromise.then((db) => {
 });
 
 // Middleware to verify JWT token
-const verifyToken = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -38,6 +38,8 @@ const verifyToken = async (req, res, next) => {
   } catch (err) {
     if (err.code === "ERR_PASETO_CLAIM_INVALID") {
       return res.status(403).json({ error: "Token Expired" });
+    } else if (err.code === "ERR_PASETO_INVALID") {
+      return res.status(403).json({ error: "Invalid Token" });
     } else {
       return res.status(500).json({ error: "Server error" });
     }
@@ -45,7 +47,7 @@ const verifyToken = async (req, res, next) => {
 };
 
 // Protected route
-app.patch("/users/:userId", verifyToken, (req, res) => {
+app.patch("/users/:userId", authMiddleware, (req, res) => {
   // Check if the user is authorized to access the resource
   if (req.userId !== req.params.userId) {
     return res.status(403).json({ message: "Forbiddens" });

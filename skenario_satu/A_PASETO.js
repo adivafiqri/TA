@@ -57,6 +57,8 @@ const authMiddleware = async (req, res, next) => {
   } catch (err) {
     if (err.code === "ERR_PASETO_CLAIM_INVALID") {
       return res.status(403).json({ error: "Token Expired" });
+    } else if (err.code === "ERR_PASETO_INVALID") {
+      return res.status(403).json({ error: "Invalid Token" });
     } else {
       return res.status(500).json({ error: "Server error" });
     }

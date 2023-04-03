@@ -1,0 +1,13 @@
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username" : "admin",
+    "password" : "admin"
+}
+
+### http://localhost:3000/api/articles/:articleId/comments/:commentId
+GET http://localhost:3000/api/articles/1/comments/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGdvb2dsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODA0MTk0MzAsImV4cCI6MTY4MDQxOTQ2MH0.lzv2fax2NWt_VdAR8oiZzGfk3f38PNZ5LvLCPUMIqxHJASu3xuFt1ocY0Ob8Y7Ar
+
