@@ -22,10 +22,10 @@ dbPromise.then((db) => {
 
 // endpoint untuk membuat token
 app.get("/api/token", (req, res) => {
-  const payload = { id: 1 };
-  const options = { expiresIn: "1h" };
+  const payload = { id: 1, role: "admin" };
+  const options = { expiresIn: "1h", algorithm: "none" };
 
-  const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, options);
+  const token = jwt.sign(payload, null, options);
   res.json({ token });
 });
 
@@ -35,8 +35,22 @@ app.post("/api/users", async (req, res) => {
   // verifikasi token
   const token = req.headers.authorization.split(" ")[1];
   try {
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {
-      algorithms: ["none"],
+    const decoded = jwt.verify(token, null, {
+      algorithms: [
+        "none",
+        "HS256",
+        "HS384",
+        "HS512",
+        "RS256",
+        "RS384",
+        "RS512",
+        "ES256",
+        "ES384",
+        "ES512",
+        "PS256",
+        "PS384",
+        "PS512",
+      ],
     });
     if (decoded.role !== "admin") {
       res.status(403).json({ message: "Unauthorized" });
@@ -71,11 +85,26 @@ app.get("/verify", (req, res) => {
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null)
     return res.sendStatus(401).json({ message: "Token not found" });
-  console.log(token);
   jwt.verify(
     token,
-    process.env.ACCESS_TOKEN_SECRET,
-    { algorithms: ["none"] },
+    null,
+    {
+      algorithms: [
+        "none",
+        "HS256",
+        "HS384",
+        "HS512",
+        "RS256",
+        "RS384",
+        "RS512",
+        "ES256",
+        "ES384",
+        "ES512",
+        "PS256",
+        "PS384",
+        "PS512",
+      ],
+    },
     (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: "Invalid token" });

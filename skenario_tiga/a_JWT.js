@@ -20,17 +20,6 @@ dbPromise.then((db) => {
   );
 });
 
-function maskUserData(user) {
-  const maskedUser = { ...user };
-  if (user.noKTP) {
-    maskedUser.noKTP = "****";
-  }
-  if (user.password) {
-    maskedUser.password = "****";
-  }
-  return maskedUser;
-}
-
 app.post("/login", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;

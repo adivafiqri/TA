@@ -35,27 +35,40 @@ function retrieveAuthor(authorId) {
   // Implement logic to retrieve author information from the database
   // For example:
   const authors = [
-    { id: 0, name: "admin", email: "admin@google.com", role: "admin" },
+    {
+      id: 0,
+      username: "admin",
+      password: "password",
+      name: "admin",
+      email: "admin@google.com",
+      role: "admin",
+    },
     {
       id: 1,
+      username: "john",
       name: "John Doe",
       email: "john.doe@example.com",
       role: "user",
       noKTP: "123456789",
+      password: "john",
     },
     {
       id: 2,
+      username: "jane",
       name: "Jane Smith",
       email: "jane.smith@example.com",
       role: "user",
       noKTP: "123456987",
+      password: "jane",
     },
     {
       id: 3,
+      username: "bob",
       name: "Bob Johnson",
       email: "bob.johnson@example.com",
       role: "user",
       noKTP: "12345212",
+      password: "bob",
     },
   ];
   return authors.find((author) => author.id === authorId);
