@@ -13,12 +13,25 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3000/api/users
-Authorization: Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VySWQiOiIyIiwibmFtZSI6ImFsaWNlIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MDI0Mzc4MX0.
+Authorization: Bearer eyAiYWxnIjoibm9uZSIsICJ0eXAiOiJKV1QifQ.eyJ1c2VySWQiOiAiMyIsIm5hbWUiOiAiYm9iIiwiZW1haWwiOiAiYm9iQGV4YW1wbGUuY29tIiwicm9sZSI6ICJhZG1pbiIsICJpYXQiOiAxNjgwNzA2NzIzLCAiaXNzIjogInVybjpqd3QifQ.
 Content-Type: application/json
 
 {
-    "username" : "testing",
-    "email" : "email@testing.com",
-    "password" : "testing",
+    "username" : "hacking",
+    "email" : "email@hacking.com",
+    "password" : "hacking",
     "role" : "admin"
+}
+
+
+
+################# PASETO ###########################
+
+### LOGIN
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "username" : "bob",
+    "password" : "bob"
 }

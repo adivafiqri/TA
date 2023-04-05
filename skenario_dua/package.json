@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "ajwt": "nodemon --legacy-watch A_JWT.js",
+    "apaseto": "nodemon --legacy-watch A_PASETO.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
