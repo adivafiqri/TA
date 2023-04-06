@@ -68,7 +68,7 @@ function generateAccessToken(user) {
   return V3.encrypt(user, process.env.ACCESS_TOKEN_SECRET, {
     audience: "urn:example:client",
     issuer: "https://op.example.com",
-    expiresIn: "30s",
+    expiresIn: "1h",
   });
 }
 //fungsi generate refresh token
@@ -143,4 +143,4 @@ async function retrieveAuthor(authorId) {
 }
 
 // Start the server
-app.listen(3000, () => console.log("Server started on port 3000"));
+app.listen(8080, () => console.log("Server started on port 8080"));
