@@ -1,0 +1,2 @@
+### VULNERABILITY
+GET http://localhost:4000/shops/3/revenue_data.json

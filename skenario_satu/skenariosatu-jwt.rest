@@ -40,6 +40,5 @@ Content-Type: application/json
     "password" : "dd"
 }
 
-
-
-
+### VULNERABILITY
+GET http://localhost:4000/shops/2/revenue_data.json
