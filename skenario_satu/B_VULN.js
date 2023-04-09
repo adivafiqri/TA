@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
-const port = 5000;
+const port = 3000;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,7 +38,9 @@ const authMiddleware = async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     req.headers["X-User-Id"] = decoded.userId;
-    req.userId = decoded.userId;
+
+    //->>>>> Tanpa ngecek User ID
+    //req.userId = decoded.userId;
     next();
   } catch (err) {
     if (err instanceof jwt.TokenExpiredError) {
@@ -55,8 +57,8 @@ app.patch("/users/:userId", authMiddleware, async (req, res) => {
   try {
     const xUserId = req.headers["x-user-id"];
     console.log("X-User-Id header:", xUserId);
-    // Check if the user is authorized to access the resource
-    if (req.userId !== req.params.userId || xUserId !== req.params.userId) {
+    // ==================== VULNERABILITY KARENA HANYA MENGECEK APAKH TERDAAT xUserId pada HEADER HTTPS
+    if (xUserId !== req.params.userId) {
       return res.status(403).json({ message: "Forbidden" });
     }
 
@@ -111,6 +113,7 @@ app.post("/api/login", async (req, res) => {
   refreshTokensCollection.insertOne({ token: refreshToken }, (err) => {
     if (err) return res.sendStatus(500);
   });
+
   res.set("X-User-Id", user.userId);
   res.json({
     accessToken: accessToken,

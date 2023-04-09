@@ -18,26 +18,26 @@ Content-Type: application/json
 }
 
 ### LOGIN
-POST http://localhost:4000/login
+POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "username" : "cc",
-    "password" : "cc"
+    "username" : "alice",
+    "password" : "alice"
 }
 
 ### Skenario satu A
-GET  http://localhost:5000/shops/2/revenue_data.json
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImFkbWluIiwiaWF0IjoxNjc5MzcyNzUyLCJleHAiOjE2NzkzNzI3ODJ9.15SWYHFUaYXS-wCbiR2DxFCQySCw-ms4YoXj-CjXyIMsqn31il_PxR7tVkg6B8lH
+GET  http://localhost:8080/shops/2/revenue_data.json
+Authorization: Bearer v3.local.GmLaI5e1dnBCRRqiPbpz6QK8uQf9dlBUjpRhPvRcwL6XZYMpCqxCy3t5ITGpc1hY730mRpapS99dOazWpKZEuFGPoUKtPpCI913nMrbetO4-lhdM41UvT-LnV5ozcL42ycHNafUSasmm6sT0LfzxgXjbA0DhcHHjp_2mdVVctY4QqJ4nJSiFqXNkwkghRoS-SD9_9G2R5sWD4iGmnvej2ehSKD59qdwu7jbbsq3cc2zmEspV5JBNFhstwy48LGqZiEndbseknAc0qsoFMP6QXvAsQN7YfVkmiKSBTIXmpbE
 
 ### Skenario satu B
-PATCH  http://localhost:5000/users/1
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImNjIiwiaWF0IjoxNjc5NTQwNzE2LCJleHAiOjE2Nzk1NDA3NDZ9.wjHtGuxQp6tFhfa4mqxzwQu2oCQu5YrsoLT270uIeGIVtGNT7Mbcv75aDICs0PZd
+PATCH  http://localhost:5000/users/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImhoIiwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODA5MzU0NTQsImV4cCI6MTY4MDkzOTA1NH0.2GajPKKAwt4BnXZwQM5MBjDsvDD1b0R0Yr5VItJqJSYtkXwavv8Lw3dIAd23-5IX
 Content-Type: application/json
 
 {
-    "username" : "dd",
-    "password" : "dd"
+    "username" : "bb",
+    "password" : "bb"
 }
 
 ### VULNERABILITY

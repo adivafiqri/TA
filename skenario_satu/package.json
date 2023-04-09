@@ -10,7 +10,7 @@
     "bpaseto": "nodemon --legacy-watch B_PASETO.js",
     "loginjwt": "nodemon --legacy-watch login_JWT.js",
     "loginpaseto": "nodemon --legacy-watch login_PASETO.js",
-    "avuln": "nodemon --legacy-watch a_vuln.js",
+    "bvuln": "nodemon --legacy-watch b_vuln.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -2,66 +2,47 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const { V3 } = require("paseto");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const port = 5000;
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.json());
 
 const connectToMongo = require("./dbMongo");
 const dbPromise = connectToMongo();
 
 //refreshtoken
-let shopPermissions;
-let shopsCollections;
+
 let userCollection;
 let refreshTokensCollection;
 
 dbPromise.then((db) => {
-  shopPermissions = db.collection(process.env.SHOP_PERMISSIONS_COLLECTION_NAME);
-  shopsCollections = db.collection(process.env.SHOPS_COLLECTION_NAME);
   userCollection = db.collection(process.env.USER_COLLECTION_NAME);
   refreshTokensCollection = db.collection(
     process.env.REFRESH_TOKENS_COLLECTION_NAME
   );
 });
 
-// Fungsi untuk memeriksa apakah pengguna memiliki hak akses ke toko yang dimaksud
-const checkPermission = async (shopId, userId) => {
-  try {
-    // Mencari hak akses pengguna ke toko tertentu
-    const permission = await shopPermissions.findOne({
-      shop_id: shopId,
-      user_id: userId,
-    });
-
-    // Jika pengguna memiliki hak akses, return true, jika tidak return false
-    if (permission) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-    if (token == null) return res.sendStatus(401);
-
-    const payload = await V3.decrypt(token, process.env.ACCESS_TOKEN_SECRET);
-    console.log(payload.userId);
-    const hasPermission = await checkPermission(
-      req.params.shopId,
-      payload.userId
-    );
-
-    if (hasPermission) {
-      req.userId = payload.userId;
-      next();
-    } else {
-      res.status(403).send("Forbidden");
+    if (!token) {
+      return res.status(401).json({ message: "Token not found" });
     }
+    const cookieValue = req.cookies["token"];
+    const decoded = await V3.decrypt(token, process.env.ACCESS_TOKEN_SECRET);
+    console.log(decoded);
+    if (cookieValue !== token) {
+      return res.status(401).json({ message: "Forbidden cookie tidak sama" });
+    }
+    req.userId = decoded.userId;
+    next();
   } catch (err) {
     if (err.code === "ERR_PASETO_CLAIM_INVALID") {
       return res.status(403).json({ error: "Token Expired" });
@@ -73,31 +54,36 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-// Handler untuk endpoint /shops/:shopId/revenue_data.json
-app.get(
-  "/shops/:shopId/revenue_data.json",
-  authMiddleware,
-  async (req, res) => {
-    // Menampilkan data penjualan untuk toko dengan ID shopId
-    try {
-      const shop = await shopsCollections.findOne({
-        id: req.params.shopId,
-      });
-
-      if (!shop) {
-        return res.status(404).send("Toko tidak ditemukan");
-      }
-
-      // Menampilkan data penjualan untuk toko dengan ID shopId
-      // Kirimkan data revenue dalam bentuk JSON
-      res.send(
-        `Revenue data untuk toko ${shop.name} sejumlah ${shop.revenue} `
-      );
-    } catch (error) {
-      console.log(error);
+// Protected route
+app.patch("/users/:userId", authMiddleware, async (req, res) => {
+  try {
+    // Check if the user is authorized to access the resource
+    if (req.userId !== req.params.userId) {
+      return res.status(403).json({ message: "Forbidden" });
     }
+
+    // Update user data
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return res
+        .status(400)
+        .json({ message: "Username and password are required" });
+    }
+    const change_user = await userCollection.updateOne(
+      { id: req.userId },
+      { $set: { username, password } }
+    );
+
+    if (!change_user) {
+      return res.status(404).send("Gagal Melakukan update!");
+    }
+
+    res.status(200).json({ message: "User data updated" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
-);
+});
 
 //POST : login
 app.post("/login", async (req, res) => {
@@ -114,12 +100,16 @@ app.post("/login", async (req, res) => {
   }
 
   const accessToken = await generateAccessToken({
-    userId: user.userId,
+    userId: user.id,
     name: username,
+    email: user.email,
+    role: user.role,
   });
   const refreshToken = await generateRefreshToken({
-    userId: user.userId,
+    userId: user.id,
     name: username,
+    email: user.email,
+    role: user.role,
   });
 
   try {
@@ -128,15 +118,16 @@ app.post("/login", async (req, res) => {
     console.log(err);
     return res.sendStatus(500);
   }
-
+  //respons ke cookie dengan httpOnly false
+  res.cookie("token", accessToken, { httpOnly: false });
   res.json({ accessToken: accessToken, refreshToken: refreshToken });
 });
 
 //fungsi generate access token
 function generateAccessToken(user) {
   return V3.encrypt(user, process.env.ACCESS_TOKEN_SECRET, {
-    audience: "urn:example:adiva",
-    issuer: "https://adiva.com",
+    audience: "urn:example:client",
+    issuer: "https://op.example.com",
     expiresIn: "1h",
   });
 }
@@ -145,6 +136,5 @@ function generateRefreshToken(user) {
   return V3.encrypt(user, process.env.REFRESH_TOKEN_SECRET);
 }
 
-app.listen(8080, () => {
-  console.log("Server started on port 8080");
-});
+// Start the server
+app.listen(port, () => console.log(`Server started on port ${port}`));

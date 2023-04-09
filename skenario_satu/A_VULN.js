@@ -12,26 +12,28 @@ let shopPermissions;
 let shopsCollections;
 
 dbPromise.then((db) => {
-  shopPermissions = db.collection(process.env.SHOP_PERMISSIONS_COLLECTION_NAME);
   shopsCollections = db.collection(process.env.SHOPS_COLLECTION_NAME);
+  shopPermissions = db.collection(process.env.SHOP_PERMISSIONS_COLLECTION_NAME);
 });
 
 // Handler untuk endpoint /shops/:shopId/revenue_data.json
 app.get("/shops/:shopId/revenue_data.json", async (req, res) => {
-  console.log(req.params.shopId);
   // Ambil data revenue dari database untuk toko dengan shopId
+  try {
+    const shop = await shopsCollections.findOne({
+      id: req.params.shopId,
+    });
 
-  const shop = await shopsCollections.findOne({
-    id: req.params.shopId,
-  });
+    if (!shop) {
+      return res.status(404).send("Toko tidak ditemukan");
+    }
 
-  if (!shop) {
-    return res.status(404).send("Toko tidak ditemukan");
+    // Menampilkan data penjualan untuk toko dengan ID shopId
+    // Kirimkan data revenue dalam bentuk JSON
+    res.send(`Revenue data untuk toko ${shop.name} sejumlah ${shop.revenue} `);
+  } catch (error) {
+    console.log(error);
   }
-
-  // Menampilkan data penjualan untuk toko dengan ID shopId
-  // Kirimkan data revenue dalam bentuk JSON
-  res.send(`Revenue data untuk toko ${shop.name} sejumlah ${shop.revenue} `);
 });
 
 app.listen(4000, () => {

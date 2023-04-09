@@ -3,11 +3,29 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "username" : "admin",
-    "password" : "password"
+    "username" : "john",
+    "password" : "john"
 }
 
-### http://localhost:3000/api/articles/:articleId/comments/:commentId
-GET http://localhost:3000/api/articles/1/comments/1
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGdvb2dsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODA0MTk0MzAsImV4cCI6MTY4MDQxOTQ2MH0.lzv2fax2NWt_VdAR8oiZzGfk3f38PNZ5LvLCPUMIqxHJASu3xuFt1ocY0Ob8Y7Ar
+### Skenario Ganti password dan username
+PATCH  http://localhost:5000/users/1
+Authorization: Bearer v3.local.D657f4C_O8S_rioPBnapfyARL5EoAK7Uot4EdA_c_nSHjc6zJ-b_sNyRyDNemkgR-T70c42sk9zeXpLZfimn9NayABWm5Zh5H2VqBP-9IxFcyNnRQW5RTsjTW7ImFeFwq-YBM_MB0GdUq1PCy49Hc74odptM0IvgO5UZuLLszhiRBbOfG2pRYn3EBKBY308oCoplWVUuWUvD4lP4gB9NqlqRcubxy3yXAqgYM9eDtwoq56ZejV9uaobdY_YNPHWDcyCjZvtwia9Qz4nYcKBhD6pvYjVKz6LCj6HnoPBcl9Xf-Ojl3tI
+Content-Type: application/json
 
+{
+    "username" : "dd",
+    "password" : "dd"
+}
+
+
+
+############### PASETO ###################
+
+### Login
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username" : "bob",
+    "password" : "bob"
+}
