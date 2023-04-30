@@ -3,8 +3,8 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "username" : "admin",
-    "password" : "admin"
+    "username" : "bob",
+    "password" : "bob"
 }
 
 ### http://localhost:3000/api/articles/:articleId/comments/:commentId
