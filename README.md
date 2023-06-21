@@ -12,6 +12,7 @@ Environment yang dibutuhkan:
 1. POSTMAN
 2. VSCODE
 3. DOCKER
+4. REST Client Extension (Pengganti postman sementara)
 
 ### Pengujian keamanan
 
@@ -21,3 +22,4 @@ Environment yang dibutuhkan:
 
 1. POSTMAN
 2. VSCODE
+3. REST Client Extension (Pengganti postman sementara)

@@ -122,7 +122,7 @@ app.post("/api/login", async (req, res) => {
   });
 
   if (!user) {
-    return res.sendStatus(401);
+    return res.sendStatus(401).json({ error: "Unauthorized" });
   }
 
   // Generate tokens and respond to client
