@@ -56,8 +56,8 @@ const authMiddleware = async (req, res, next) => {
       });
     });
 
-    console.log(payload.userId);
-    console.log(req.params.shopId);
+    // console.log(payload.userId);
+    // console.log(req.params.shopId);
     const hasPermission = await checkPermission(
       req.params.shopId,
       payload.userId

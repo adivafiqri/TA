@@ -1,5 +1,6 @@
-## Skenario 1A Akses API secara sah
-### LOGIN
+# ================ 1A =========================
+## === Skenario 1A JWT Akses API secara sah ===
+### 1. LOGIN
 POST http://localhost:5000/api/login
 Content-Type: application/json
 
@@ -8,20 +9,47 @@ Content-Type: application/json
     "password" : "bob"
 }
 
+### 2. Respons server akses secara sah (Bob dengan shopid 1 = sah)
+GET  http://localhost:5000/shops/1/revenue_data.json
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwibmFtZSI6ImJvYiIsImVtYWlsIjoiYm9iQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODczOTcyNzgsImV4cCI6MTY4NzQwMDg3OH0.qOeo2xrUefFgVj-ZjfVX_K-dHGGnWuZ8r0OKCbW2b-TozAN0lz9IUZ6HKzSnGueB
 
-GET http://localhost:3000/posts
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc5MDcxNTUsImV4cCI6MTY3NzkwNzE4NX0.oI6Y3vcZUlZbmibuicIXbeKQL-_2-ADkFFhv3qpFL9tIbMjbGd2czS3N0bxuH3i8
+### === Skenario 1A JWT Akses API secara tidak sah ===
+GET  http://localhost:5000/shops/2/revenue_data.json
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzIiwibmFtZSI6ImJvYiIsImVtYWlsIjoiYm9iQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODczOTcyNzgsImV4cCI6MTY4NzQwMDg3OH0.qOeo2xrUefFgVj-ZjfVX_K-dHGGnWuZ8r0OKCbW2b-TozAN0lz9IUZ6HKzSnGueB
 
-###
-DELETE http://localhost:4000/logout
+# ================ 1B =========================
+## === Skenario 1B JWT PATCH X-User-Id (UPDATE USER sesuai dengan IDnya) ===
+### 1. LOGIN
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "username" : "adiva",
+    "password" : "adiva"
+}
+### 2. Mencoba mengganti username dan password 
+PATCH  http://localhost:5000/users/1
+x-User-ID: 
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImFkaXZhIiwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODczOTg0OTksImV4cCI6MTY4NzQwMjA5OX0.vKyf6aIMAwHZ4KJJLLUCzCCWlLcv11LbQJ8MyyoyrnYp6GJyvBgocp_bGzcWLYfR
+Content-Type: application/json
+
+{
+    "username" : "john",
+    "password" : "john"
+}
+
+# ================ LOGOUT DAN REFRESH TOKENS =========================
+
+### LOGOUT
+DELETE http://localhost:5000/logout
 Content-Type: application/json
 
 {
     "token" : "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRpdmEiLCJpYXQiOjE2Nzc5MDcxNTUsImV4cCI6MTY3NzkwNzE4NX0.oI6Y3vcZUlZbmibuicIXbeKQL-_2-ADkFFhv3qpFL9tIbMjbGd2czS3N0bxuH3i8"
 }
 
-###
-POST http://localhost:4000/token
+### REFRESH TOKENS
+POST http://localhost:5000/token
 Content-Type: application/json
 
 {
@@ -30,19 +58,6 @@ Content-Type: application/json
 
 
 
-### Skenario satu A
-GET  http://localhost:8080/shops/2/revenue_data.json
-Authorization: Bearer v3.local.GmLaI5e1dnBCRRqiPbpz6QK8uQf9dlBUjpRhPvRcwL6XZYMpCqxCy3t5ITGpc1hY730mRpapS99dOazWpKZEuFGPoUKtPpCI913nMrbetO4-lhdM41UvT-LnV5ozcL42ycHNafUSasmm6sT0LfzxgXjbA0DhcHHjp_2mdVVctY4QqJ4nJSiFqXNkwkghRoS-SD9_9G2R5sWD4iGmnvej2ehSKD59qdwu7jbbsq3cc2zmEspV5JBNFhstwy48LGqZiEndbseknAc0qsoFMP6QXvAsQN7YfVkmiKSBTIXmpbE
 
-### Skenario satu B
-PATCH  http://localhost:5000/users/2
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImhoIiwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2ODA5MzU0NTQsImV4cCI6MTY4MDkzOTA1NH0.2GajPKKAwt4BnXZwQM5MBjDsvDD1b0R0Yr5VItJqJSYtkXwavv8Lw3dIAd23-5IX
-Content-Type: application/json
 
-{
-    "username" : "bb",
-    "password" : "bb"
-}
 
-### VULNERABILITY
-GET http://localhost:4000/shops/2/revenue_data.json

@@ -1,12 +1,13 @@
-# ================ 2 =========================
-## === Skenario 2A - Header alg none ===
+# ================ 3 =========================
+## === Skenario 3A - Excessive Data Exposure ===
 ### 1. LOGIN
 POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "username" : "alice",
-    "password" : "alice"
+    "username" : "bob",
+    "password" : "password"
+}" : "alice"
 }
 
 ### 2. Menambah User dengan token NONE tanpa signature dan FORGED token role dari user biasa menjadi admin

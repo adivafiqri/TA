@@ -1,0 +1,12 @@
+# ================ 2 =========================
+## === Skenario 2A - Header alg none ===
+### 1. LOGIN
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "username" : "bob",
+    "password" : "bob"
+}
+
+## dikarenakan PASETO tidak bisa di decode, sehingga aman

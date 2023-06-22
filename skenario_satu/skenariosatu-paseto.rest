@@ -1,7 +1,44 @@
-GET http://localhost:8181/posts
-Authorization: Bearer v3.local.iHIARatXujd4Vd4Qv9ZwYGte5ja2do5XOIr8JgiejozKczpW6KP11PNpaFgADOdXU-tulCV9AHBUV7B_ejn9h68542wPk4iXvEZgCPzoRf953tWaERDIWruU7HEOcIqNaU49KF6QiHRvCIC6JM9KkZ6DmgXsvq_YxGaPVpS4PIFnGGRO28GyGazepo995vbzPcubZXgACOOyZ-uEIqflLE7xtLJGeuA5K7i4dHm_mxj6c8Wq0x0wtl228Bl7dbAdNNcroOSFTeByPT3Moo-mrNE8wOvi8p7vseHMqw
+### ===================== 1A ============================
+### === Skenario 1A PASETO Akses API secara tidak sah ===
+### 1. LOGIN
+POST http://localhost:8080/login
+Content-Type: application/json
 
-###
+{
+    "username" : "bob",
+    "password" : "bob"
+}
+### 2. Respons server akses secara sah (Bob dengan shopid 1 = sah)
+GET  http://localhost:8080/shops/1/revenue_data.json
+Authorization: Bearer v3.local.1c49GX7Tt7QjNObIIjeTwoLjKD3tz7N6DtKBTtu5fFhi5k9cOqPrwzp34IEOYs6rDez9qtKouBtNAvEHTfxfCLiVO0INt_BqL77Wvd3gnAgjb8RHBAN03qwqgJb8s9zegdIsuu2wkbZYOCxO-_d02vlU071vafhCwjRjW0_0lt-_4XPMgJDUaRaZUg4BKf2ODQV9f9EmDW30nr0ihOQ_J8mQjIf1eNlhy2wwsgeukmUfsYH55LpqQ4ZEBI9DlF6l80SuYrWZze3T0LpAQi0geBffUjHWcwG1PJNkLkQSM8rD
+
+### === Skenario 1A PASETO Akses API secara tidak sah ===
+GET  http://localhost:8080/shops/2/revenue_data.json
+Authorization: Bearer v3.local.1c49GX7Tt7QjNObIIjeTwoLjKD3tz7N6DtKBTtu5fFhi5k9cOqPrwzp34IEOYs6rDez9qtKouBtNAvEHTfxfCLiVO0INt_BqL77Wvd3gnAgjb8RHBAN03qwqgJb8s9zegdIsuu2wkbZYOCxO-_d02vlU071vafhCwjRjW0_0lt-_4XPMgJDUaRaZUg4BKf2ODQV9f9EmDW30nr0ihOQ_J8mQjIf1eNlhy2wwsgeukmUfsYH55LpqQ4ZEBI9DlF6l80SuYrWZze3T0LpAQi0geBffUjHWcwG1PJNkLkQSM8rD
+
+# ================ 1B =========================
+## === Skenario 1B PASETO PATCH X-User-Id (UPDATE USER sesuai dengan IDnya) ===
+### 1. LOGIN
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+    "username" : "john",
+    "password" : "john"
+}
+### 2. Mencoba mengganti username dan password 
+PATCH  http://localhost:8080/users/1
+Authorization: Bearer v3.local.CVMrQmS7TzZqB5aOH8LeAzGh6besjFFniIo4y6du_nvjqWXnmoh6aqFqOxxptfx8KnwZyjaAUNvOcUxo6Pux78SSKZufjtAXnGCuDjXDgkaYtAr6Z0CcuCrGOC337P_KyqxQO7nJLfNMDR06GdvgBvizf4gLxkHzvbJles5XOgqd94TyX27QdS-_Onn2uOwiadkptjH6Qi5MKEIUHLuCyvoQ-JtsbNrJyuE95pZZW2GXQZIU7khTntaA7BezOcVlCJoRiycGDoqbi6LNaLZJxZFV0-l75mv44g5qv840Hd45dnvoT5OcjA6TyA_8jLfWaNnGpZxFthAkEGG9T4tUd6WTi6JETJjSIS4OQOd3YiSy
+Content-Type: application/json
+
+{
+    "username" : "john",
+    "password" : "john"
+}
+
+# ================ LOGOUT DAN REFRESH TOKENS =========================
+
+### LOGOUT
 DELETE http://localhost:8080/logout
 Content-Type: application/json
 
@@ -9,33 +46,10 @@ Content-Type: application/json
     "token" : "v3.local.wbKo-aTkgOzdFrYHwgK-W9iPq2K5u_3xdG19CEEu-ZHc69yh_I7_Ycpa8ST4BJ4F80SC7jG4ZqAXqXJnbTvr9HBp8CPj0Pt2XdM2KxrPbfOiFo3CVoKoCObES2b9c_FlX7OOUJ1-98CHAfjsy_79Q3Dxz9TAQX3lI1fj8AS3-IKn"
 }
 
-###
+### REFRESH TOKENS
 POST http://localhost:8080/token
 Content-Type: application/json
 
 {
     "token": "v3.local.F9q7iWbB9h2z9QCtOTIf85vlbcWmFqWp58VVJnbMeAi0T6BsfGLYNMvnzuHe1lm_Fqgtiu9CV0bPQXc56ti1Efh4c1swWJGNjwsMEoYB78eumex-3e1gu0gtt2XlZ8uyw56HE2QUW8b4jpPHBLb5aw9I_pPU2A3eHGMeSwQ5d2z0"
-}
-
-### Login
-POST http://localhost:8080/api/login
-Content-Type: application/json
-
-{
-    "username" : "cc",
-    "password" : "cc"
-}
-
-### Skenario satu A
-GET  http://localhost:5000/shops/2/revenue_data.json
-Authorization: Bearer v3.local.Mc8J9UOI6g1NH2lvrmoh8F4CAzT5aWh3uM6q5QZACwor1cZA7hkZo8jPis0kM17VzDj7kydQ1oEIBJZ7H5zrl9K6DIq3Vcr9FQd_0jZ2Om7b2gqldM1r7rdfEJkW7Zrq_wkeLsMIsEQ4XDvm6XBFFIVwX4DbaPxZ5mAlxRkeI3FJopVn0LTuygnSVmUso6krkE9BSEN8nuhDuKkiZ3M_d0MbPo0U7sQim2kCZglpoHRNEebT1Y_834RNWt9ooS5Aj9XD1OZRtxp1JrzV6nF6JfMIAzrIUj5aGZTI9qs55GjGnKIMfAlOx6Q
-
-### Skenario satu B
-PATCH  http://localhost:5000/users/1
-Authorization: Bearer v3.local.D657f4C_O8S_rioPBnapfyARL5EoAK7Uot4EdA_c_nSHjc6zJ-b_sNyRyDNemkgR-T70c42sk9zeXpLZfimn9NayABWm5Zh5H2VqBP-9IxFcyNnRQW5RTsjTW7ImFeFwq-YBM_MB0GdUq1PCy49Hc74odptM0IvgO5UZuLLszhiRBbOfG2pRYn3EBKBY308oCoplWVUuWUvD4lP4gB9NqlqRcubxy3yXAqgYM9eDtwoq56ZejV9uaobdY_YNPHWDcyCjZvtwia9Qz4nYcKBhD6pvYjVKz6LCj6HnoPBcl9Xf-Ojl3tI
-Content-Type: application/json
-
-{
-    "username" : "dd",
-    "password" : "dd"
 }

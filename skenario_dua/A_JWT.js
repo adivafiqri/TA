@@ -53,11 +53,11 @@ app.post("/api/users", async (req, res) => {
       ],
     });
     if (decoded.role !== "admin") {
-      res.status(403).json({ message: "Unauthorized" });
+      res.status(403).json({ message: "Bukan admin!" });
       return;
     }
   } catch (error) {
-    res.status(401).json({ message: "Invalid token" });
+    res.status(401).json({ message: "Tidak bisa tambah user!" });
     return;
   }
 

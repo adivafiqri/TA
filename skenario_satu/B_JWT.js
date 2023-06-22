@@ -53,7 +53,7 @@ const authMiddleware = async (req, res, next) => {
 // Protected route
 app.patch("/users/:userId", authMiddleware, async (req, res) => {
   try {
-    const xUserId = req.headers["x-user-id"];
+    const xUserId = req.headers["X-User-Id"];
     console.log("X-User-Id header:", xUserId);
     // Check if the user is authorized to access the resource
     if (req.userId !== req.params.userId || xUserId !== req.params.userId) {

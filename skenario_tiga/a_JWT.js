@@ -37,13 +37,13 @@ app.post("/login", async (req, res) => {
 
   // Generate tokens and respond to client
   const accessToken = generateAccessToken({
-    userId: user.userId,
+    userId: user.id,
     name: user.name,
     email: user.email,
     role: user.role,
   });
   const refreshToken = generateRefreshToken({
-    userId: user.userId,
+    userId: user.id,
     name: user.name,
     email: user.email,
     role: user.role,
