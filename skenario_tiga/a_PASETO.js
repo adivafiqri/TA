@@ -46,11 +46,11 @@ app.post("/login", async (req, res) => {
   }
 
   const accessToken = await generateAccessToken({
-    userId: user.userId,
+    userId: user.id,
     name: username,
   });
   const refreshToken = await generateRefreshToken({
-    userId: user.userId,
+    userId: user.id,
     name: username,
   });
 
@@ -90,6 +90,8 @@ const authMiddleware = async (req, res, next) => {
     if (err.code === "ERR_PASETO_CLAIM_INVALID") {
       return res.status(403).json({ error: "Token Expired" });
     } else if (err.code === "ERR_PASETO_INVALID") {
+      return res.status(403).json({ error: "Invalid Token" });
+    } else if (err.code === "ERR_PASETO_DECRYPTION_FAILED") {
       return res.status(403).json({ error: "Invalid Token" });
     } else {
       console.log(err);

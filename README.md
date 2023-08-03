@@ -67,3 +67,30 @@ Skenario 1B ini bertujuan untuk PATCH X-User-Id (UPDATE USER sesuai dengan IDnya
 
 - Tutorial API:
   sudah diurutkan pada skenariosatu-jwt.rest dan skenariosatu-paseto.rest
+
+#### Skenario_dua
+
+==== 2 A =====
+JWT dan PASETO melakukan eksploitasi algoritma
+
+==== 2 B =====
+
+JWT dan PASETO decode token
+
+#### Skenario_tiga
+
+JWT DAN PASETO ini tinggal ikutin skenariotiga-jwt.rest dan skenariotiga-paseto.rest
+
+kekurangan skenario_tiga : bukan tokennya yang menutupi excesive data pada komentar, tapi koding json itu sendiri
+
+#### Skenario_empat
+
+Skenario ini melakukan CSRF
+SKENARIONYA:
+Seseorang ingin mengganti password, dan terdapat attacker yang melakukan intercept ditengah tengah
+
+Membutuhkan APK tambahan : Burpsuite
+
+Folder APK Burpsuite : d:\APK\burpsuite (laptop)
+
+Settings proxy pada postman menjadi 127.0.0.1:8080
