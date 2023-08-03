@@ -1,12 +1,14 @@
-# ================ 2 =========================
-## === Skenario 2A - Header alg none ===
+# ================ 3 =========================
+## === Skenario 3A - Header alg none ===
 ### 1. LOGIN
 POST http://localhost:8080/login
 Content-Type: application/json
 
 {
     "username" : "bob",
-    "password" : "bob"
+    "password" : "password"
 }
 
-## dikarenakan PASETO tidak bisa di decode, sehingga aman
+### 2. Mengakses data user dari komentar yang ingin dilihat
+GET http://localhost:8080/api/articles/1/comments/1
+Authorization: Bearer v3.local.7-ziRcUnud-S12JrC5ilR51B_-ZlOlZXgzxj7apuwiLBhBWgzU7t7zThzvX5CspVgZtmlSI93Qi4IpGqSuvqTW5YkmAYrmNH6ba5CY0fIYfdxlljHX1-ztsOjmgbZDpw-6y1CsZeAdkP18-DbQKQrbln-8ucZRTAOfzKXX7PdDHul3b8OJe0QfItd250Uuc9EOOSow56hbL152enkNQKE5jQf3LATVzQZ-ZrHxDOQ00WHWgMfZrNdft9r796Uh1yabE2LlWfZJwJNq12No-pe0Fx-THODztVNslELToOtEc98ombCA
