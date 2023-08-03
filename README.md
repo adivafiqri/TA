@@ -1,5 +1,6 @@
 # Tugas Akhir D4 Adiva
 
+
 ## Penjelasan Skenario
 
 ### Pengujian Performa
@@ -21,13 +22,19 @@ docker-compose.yaml : untuk membuat container dan service serta perintah untuk m
 
 Tata Cara menjalankan contoh pada folder JWT:
 1. ketik "sudo docker-compose -f docker-compose.yml up" (Membuat container)
-1.1. ketik "sudo docker-compose -f docker-compose.yml up -d" (-d adalah detach) (Membuat container jalan dibalik layar)
-1.2. ketik "sudo docker-compose -f docker-compose.yml up -d --build" (Membuat container jalan dibalik layar dan melihat debug cara detailnya)
-1.1.1 ketik "docker logs namacontainer -f" (untuk kembali melihat tanpa detach)
+- ketik "sudo docker-compose -f docker-compose.yml up -d" (-d adalah detach) (Membuat container jalan dibalik layar)
+- ketik "sudo docker-compose -f docker-compose.yml up -d --build" (Membuat container jalan dibalik layar dan melihat debug cara detailnya)
+- ketik "docker logs namacontainer -f" (untuk kembali melihat tanpa detach)
 
 2. untuk melihat container yang sedang berjalan bisa "docker container ls" atau "docker container ls | grep namacontainer"
 
 3. untuk masuk ke container bisa "docker exec -t namacontainer sh"
+
+#### Performa JWT
+1. Jalankan docker-compose
+2. buka postman dan ketik localhost:4000/login POST dengan body JSON username:adiva dan password:adiva
+3. muncul Execution time dan jumlah tokennya
+
 
 
 ### Pengujian keamanan
@@ -94,3 +101,28 @@ Membutuhkan APK tambahan : Burpsuite
 Folder APK Burpsuite : d:\APK\burpsuite (laptop)
 
 Settings proxy pada postman menjadi 127.0.0.1:8080
+
+#### MONGO SHELL
+
+cara log in mongo shell
+1. mongosh "mongodb+srv://taadiva.3lgefed.mongodb.net/pengujiantoken" --apiVersion 1 --username adivafiqri
+2. masukan password m7K0G0eMK7qL27ag
+3. selesai
+
+
+##### command mongo shell
+- menampilkan db: show dbs
+- menggunakan db: use <nama_database>
+- menampilkan koleksi: show collections
+- menampilkan data all koleksi:db.<nama_koleksi>.find()
+- menampilkan spesifik: db.<nama_koleksi>.find({ field: value })
+- Menampilkan satu dokumen dalam suatu koleksi: db.<nama_koleksi>.findOne()
+- Menampilkan dokumen dengan kriteria tertentu: db.<nama_koleksi>.findOne({ field: value })
+
+- edit dokumen: db.<nama_koleksi>.updateOne({ field: value }, { $set: { new_field: new_value } })
+
+- edit banyak: db.<nama_koleksi>.updateMany({ field: value }, { $set: { new_field: new_value } })
+
+- delete satu : db.<nama_koleksi>.deleteOne({ field: value })
+
+- delete banyak : db.<nama_koleksi>.remove({})
