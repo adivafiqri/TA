@@ -35,7 +35,10 @@ Tata Cara menjalankan contoh pada folder JWT:
 2. buka postman dan ketik localhost:4000/login POST dengan body JSON username:adiva dan password:adiva
 3. muncul Execution time dan jumlah tokennya
 
-
+#### Performa PASETO
+1. Jalankan docker-compose
+2. buka postman dan ketik localhost:8080/login POST dengan body JSON username:adiva dan password:adiva
+3. muncul Execution time dan jumlah tokennya
 
 ### Pengujian keamanan
 
