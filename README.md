@@ -14,6 +14,22 @@ Environment yang dibutuhkan:
 3. DOCKER
 4. REST Client Extension (Pengganti postman sementara)
 
+
+Penjelasan:
+DockerFile : untuk menginstall segala keperluan image
+docker-compose.yaml : untuk membuat container dan service serta perintah untuk menjalankan si node.jsnya
+
+Tata Cara menjalankan contoh pada folder JWT:
+1. ketik "sudo docker-compose -f docker-compose.yml up" (Membuat container)
+1.1. ketik "sudo docker-compose -f docker-compose.yml up -d" (-d adalah detach) (Membuat container jalan dibalik layar)
+1.2. ketik "sudo docker-compose -f docker-compose.yml up -d --build" (Membuat container jalan dibalik layar dan melihat debug cara detailnya)
+1.1.1 ketik "docker logs namacontainer -f" (untuk kembali melihat tanpa detach)
+
+2. untuk melihat container yang sedang berjalan bisa "docker container ls" atau "docker container ls | grep namacontainer"
+
+3. untuk masuk ke container bisa "docker exec -t namacontainer sh"
+
+
 ### Pengujian keamanan
 
 - pengujian keamanan terdapat pada folder skenario_satu, skenario_dua, skenario_tiga, skenario_empat
