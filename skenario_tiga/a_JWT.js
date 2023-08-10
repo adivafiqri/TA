@@ -105,6 +105,16 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
+//DELETE : logout
+app.delete("/logout", (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokensCollection.deleteOne({ token: refreshToken }, (err, result) => {
+    if (err) return res.sendStatus(500);
+  });
+  res.sendStatus(204);
+});
+
+// Get : akses sensitif data melalui komentar
 app.get(
   "/api/articles/:articleId/comments/:commentId",
   authMiddleware,

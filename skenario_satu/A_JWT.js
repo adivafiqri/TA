@@ -151,6 +151,16 @@ app.post("/api/login", async (req, res) => {
   });
 });
 
+//DELETE : logout
+app.delete("/logout", (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokensCollection.deleteOne({ token: refreshToken }, (err, result) => {
+    if (err) return res.sendStatus(500);
+  });
+  res.sendStatus(204);
+});
+
+
 function generateAccessToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: "1h",

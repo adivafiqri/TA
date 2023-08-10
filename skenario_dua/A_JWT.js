@@ -131,6 +131,15 @@ app.post("/login", async (req, res) => {
     return res.sendStatus(401);
   }
 
+//DELETE : logout
+app.delete("/logout", (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokensCollection.deleteOne({ token: refreshToken }, (err, result) => {
+    if (err) return res.sendStatus(500);
+  });
+  res.sendStatus(204);
+});
+
   // Generate tokens and respond to client
   const accessToken = generateAccessToken({
     userId: user.userId,

@@ -43,7 +43,7 @@ DELETE http://localhost:8080/logout
 Content-Type: application/json
 
 {
-    "token" : "v3.local.wbKo-aTkgOzdFrYHwgK-W9iPq2K5u_3xdG19CEEu-ZHc69yh_I7_Ycpa8ST4BJ4F80SC7jG4ZqAXqXJnbTvr9HBp8CPj0Pt2XdM2KxrPbfOiFo3CVoKoCObES2b9c_FlX7OOUJ1-98CHAfjsy_79Q3Dxz9TAQX3lI1fj8AS3-IKn"
+    "token" : "v3.local.UYN1WM86js6hHmfSYKLbWgEe7Uta180ysKncaqvvpQ4NA7kMLalbyqAkvcrn3juq5fCSk_pEW6uhEcnCh5WvIQQAHBENwfY8gIEwPQbbalpfGMzkbD0cNhiFH5kLfLMrRVWduGxSUBIhMU4IsNkrL2GqOSh3ewTjYMrD7wJNVCiR43F6-UIv_lZgRt-sE_SrUlAsRCz85oaXzqkHU06GIQnLR0zmwGyhbEtmj-FcAA5LUYdsfiU"
 }
 
 ### REFRESH TOKENS

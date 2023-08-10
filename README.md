@@ -1,6 +1,5 @@
 # Tugas Akhir D4 Adiva
 
-
 ## Penjelasan Skenario
 
 ### Pengujian Performa
@@ -116,7 +115,7 @@ cara log in mongo shell
 ##### command mongo shell
 - menampilkan db: show dbs
 - menggunakan db: use <nama_database>
-- menampilkan koleksi: show collections
+- menampilkan koleksi: show collectionso
 - menampilkan data all koleksi:db.<nama_koleksi>.find()
 - menampilkan spesifik: db.<nama_koleksi>.find({ field: value })
 - Menampilkan satu dokumen dalam suatu koleksi: db.<nama_koleksi>.findOne()

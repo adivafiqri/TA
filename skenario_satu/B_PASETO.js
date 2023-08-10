@@ -121,6 +121,15 @@ app.post("/api/login", async (req, res) => {
   res.json({ accessToken: accessToken, refreshToken: refreshToken });
 });
 
+//DELETE : logout
+app.delete("/logout", (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokensCollection.deleteOne({ token: refreshToken }, (err, result) => {
+    if (err) return res.sendStatus(500);
+  });
+  res.sendStatus(204);
+});
+
 //fungsi generate access token
 function generateAccessToken(user) {
   return V3.encrypt(user, process.env.ACCESS_TOKEN_SECRET, {
